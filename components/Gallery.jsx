@@ -23,7 +23,7 @@ const Gallery = () => {
 
          <div className="gallery-box-padding grid">
 
-              <Image src = {data[1].url} alt="" width={200} height={200} ></Image>
+             
 
          </div>
 
