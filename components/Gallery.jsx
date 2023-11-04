@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { data } from "@/data/image";
 import SortableImages from "./SortableImages";
 import { DndContext, closestCenter } from "@dnd-kit/core";
+import { IoMdCheckboxOutline } from "react-icons/io";
 import {
   SortableContext,
   arrayMove,
@@ -21,16 +22,16 @@ const Gallery = () => {
     // active: the dragged item.
 
     const { active, over } = event;
-    if (active.id === over.id) {
+    if (active?.id === over?.id) {
       return;
     }
 
     setImage((images) => {
       const oldIndexOfDraggedItem = images.findIndex(
-        (image) => image.id === active.id
+        (image) => image.id === active?.id
       );
       const newIndexOfDraggedItem = images.findIndex(
-        (image) => image.id === over.id
+        (image) => image.id === over?.id
       );
       return arrayMove(images, oldIndexOfDraggedItem, newIndexOfDraggedItem);
     });
@@ -42,7 +43,8 @@ const Gallery = () => {
       <div className="h-full w-full max-w-[842px]  rounded-lg bg-white  shadow-xl">
         {/* Gallery top Menu Bar */}
         <div className="gallery-box-padding flex h-16  w-full items-center justify-between border-b-4 border-black">
-          <div>
+          <div className="flex items-center gap-1">
+            <IoMdCheckboxOutline></IoMdCheckboxOutline>
             <p> Files Selected</p>
           </div>
           <div>
