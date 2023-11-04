@@ -3,25 +3,32 @@ import React, { useState } from "react";
 import { data } from "@/data/image";
 import SortableImages from "./SortableImages";
 import { DndContext, closestCenter } from "@dnd-kit/core";
-import { SortableContext, rectSortingStrategy } from "@dnd-kit/sortable";
+import { SortableContext, arrayMove, rectSortingStrategy } from "@dnd-kit/sortable";
 
 const Gallery = () => {
   const [images, setImage] = useState(data);
+
+
+
+// Event handler for onDragEnd event listener. It is fired after a draggable item is dropped. 
+// onDragEnd event does not move draggable items into droppable containers. 
+// Rather, it provides information about which draggable item was dropped and whether it was over a droppable container when it was dropped.
 
   const onDragEnd = (event) => {
 
 
     console.log(event); 
-     
-    //  const {active, over} = event; 
-    //  if ( active.id === over.id){
-    //     return; 
-    //  }
+    //  over: Draggable Area or Id on which draggable item was dropped over. If it wasn't dropped on anything it will be null. 
+     const {active, over} = event; 
+     if ( active.id === over.id){
+        return; 
+     }
       
-    //  setImage((users) => {
-    //       const oldIndex = users.findIndex(user => user.id === over.id)
-    //       const newIndex = 
-    //  })
+     setImage((images) => {
+          const oldIndexOfDraggedItem = images.findIndex(image => image.id === active.id)
+          const newIndexOfDraggedItem = images.findIndex(image => image.id === over.id) 
+          return arrayMove(images, oldIndexOfDraggedItem, newIndexOfDraggedItem); 
+     })
 
   }
 
