@@ -17,10 +17,9 @@ const Gallery = () => {
   // Rather, it provides information about which draggable item was dropped and whether it was over a droppable container when it was dropped.
 
   const onDragEnd = (event) => {
-
     //  over: Draggable item on which a dragged item was dropped over. If it wasn't dropped on anything it will be null.
     // active: the dragged item.
-    
+
     const { active, over } = event;
     if (active.id === over.id) {
       return;
@@ -38,13 +37,13 @@ const Gallery = () => {
   };
 
   return (
-    <section className="my-20 flex flex-col items-center justify-center">
+    <section className="flex flex-col items-center justify-center  py-20">
       {/* Gallery container */}
-      <div className="h-full w-full max-w-[842px]  rounded-lg bg-red-500 pb-5 shadow-xl">
+      <div className="h-full w-full max-w-[842px]  rounded-lg bg-white  shadow-xl">
         {/* Gallery top Menu Bar */}
-        <div className="gallery-box-padding flex h-16  w-full items-center justify-between border-b-4">
+        <div className="gallery-box-padding flex h-16  w-full items-center justify-between border-b-4 border-black">
           <div>
-            <p>Files Selected</p>
+            <p> Files Selected</p>
           </div>
           <div>
             <p>Delete Files</p>
@@ -53,18 +52,14 @@ const Gallery = () => {
 
         {/* Gallery Picture container */}
 
-        <div className="gallery-box-padding grid grid-cols-3 gap-y-4">
-
+        <div className="gallery-box-padding my-5 grid grid-cols-3 gap-y-4 ">
           {/* The <DndContext> provider makes use of the React Context API to share data between draggable and droppable components and hooks. */}
           <DndContext collisionDetection={closestCenter} onDragEnd={onDragEnd}>
-
             {/* The SortableContext provides information via context that is consumed by the useSortable hook. */}
             <SortableContext items={images} strategy={rectSortingStrategy}>
               {images.map((image) => (
-
                 // SortableImages is a custom component which internally uses useSortable hook from dnd kit to Manage drag, drop and sorting
                 <SortableImages key={image.id} image={image}></SortableImages>
-                
               ))}
             </SortableContext>
           </DndContext>
