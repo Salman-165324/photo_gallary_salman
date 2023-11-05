@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { data } from "@/data/image";
 import SortableImages from "./SortableImages";
 import { DndContext, closestCenter } from "@dnd-kit/core";
@@ -12,6 +12,10 @@ import {
 
 const Gallery = () => {
   const [images, setImage] = useState(data);
+
+  const [selectedImagesForDelete, setSelectedImagesForDelete ] = useState([]); 
+  
+   console.log("SelectedImagesForDelete", selectedImagesForDelete)
 
   // Event handler for onDragEnd event listener. It is fired after a draggable item is dropped.
   // onDragEnd event does not move draggable items into droppable containers.
@@ -61,7 +65,7 @@ const Gallery = () => {
             <SortableContext items={images} strategy={rectSortingStrategy}>
               {images.map((image) => (
                 // SortableImages is a custom component which internally uses useSortable hook from dnd kit to Manage drag, drop and sorting
-                <SortableImages key={image.id} image={image}></SortableImages>
+                <SortableImages key={image.id} image={image} setSelectedImagesForDelete = {setSelectedImagesForDelete} selectedImagesForDelete= {selectedImagesForDelete}></SortableImages>
               ))}
             </SortableContext>
           </DndContext>
