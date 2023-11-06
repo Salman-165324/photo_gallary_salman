@@ -17,11 +17,13 @@ const Gallery = () => {
   const totalSelectedImagesForDelete = selectedImagesForDelete.length;
 
   const handleDeleteImage = () => {
-    // filtering images array to find which image's id aren't in list of images for delete. 
-    const newArray = images.filter(image =>  !selectedImagesForDelete.includes(image.id))
+    // filtering images array to find which image's id aren't in list of images for delete.
+    const newArray = images.filter(
+      (image) => !selectedImagesForDelete.includes(image.id)
+    );
     setImage(newArray);
     setSelectedImagesForDelete([]);
-  }
+  };
 
   console.log(totalSelectedImagesForDelete);
 
@@ -52,11 +54,11 @@ const Gallery = () => {
   };
 
   return (
-    <section className="flex flex-col items-center justify-center  py-20">
+    <section className="flex flex-col items-center justify-center  px-4 py-20 sm:px-6">
       {/* Gallery container */}
       <div className="h-full w-full max-w-[842px]  rounded-lg bg-white  shadow-xl">
         {/* Gallery top Menu Bar */}
-        <div className="gallery-box-padding flex h-16 w-full   items-center justify-between border-b-4 border-black">
+        <div className="lg:gallery-box-padding flex h-16 w-full items-center   justify-between border-b-4 border-black px-2">
           <div className="flex items-center gap-1">
             <IoMdCheckboxOutline></IoMdCheckboxOutline>
             <p> Files Selected: {totalSelectedImagesForDelete}</p>
@@ -70,25 +72,30 @@ const Gallery = () => {
 
         {/* Gallery Picture container */}
 
-        <div className="gallery-box-padding my-5 grid grid-cols-3 gap-y-4 ">
-          {/* The <DndContext> provider makes use of the React Context API to share data between draggable and droppable components and hooks. */}
-          <DndContext collisionDetection={closestCenter} onDragEnd={onDragEnd}>
-            {/* The SortableContext provides information via context that is consumed by the useSortable hook. */}
-            <SortableContext items={images} strategy={rectSortingStrategy}>
-              {images.map((image) => (
-                // SortableImages is a custom component which internally uses useSortable hook from dnd kit to Manage drag, drop and sorting
-                <SortableImages
-                  key={image.id}
-                  image={image}
-                  setSelectedImagesForDelete={setSelectedImagesForDelete}
-                  selectedImagesForDelete={selectedImagesForDelete}
-                ></SortableImages>
-              ))}
-            </SortableContext>
-          </DndContext>
-          <div className="flex h-[200px] w-[200px] items-center justify-center bg-red-50">
-            {" "}
-            Add Images{" "}
+        <div className="flex flex-col items-center ">
+          <div className="gallery-box-padding my-5 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:gap-6">
+            {/* The <DndContext> provider makes use of the React Context API to share data between draggable and droppable components and hooks. */}
+            <DndContext
+              collisionDetection={closestCenter}
+              onDragEnd={onDragEnd}
+            >
+              {/* The SortableContext provides information via context that is consumed by the useSortable hook. */}
+              <SortableContext items={images} strategy={rectSortingStrategy}>
+                {images.map((image) => (
+                  // SortableImages is a custom component which internally uses useSortable hook from dnd kit to Manage drag, drop and sorting
+                  <SortableImages
+                    key={image.id}
+                    image={image}
+                    setSelectedImagesForDelete={setSelectedImagesForDelete}
+                    selectedImagesForDelete={selectedImagesForDelete}
+                  ></SortableImages>
+                ))}
+              </SortableContext>
+            </DndContext>
+            <div className="flex h-[200px] w-[200px] items-center justify-center bg-red-50">
+              {" "}
+              Add Images{" "}
+            </div>
           </div>
         </div>
       </div>
