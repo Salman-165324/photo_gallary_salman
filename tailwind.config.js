@@ -5,8 +5,12 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  daisyui: {
+    themes: [],
+  },
   theme: {
   
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+
 }

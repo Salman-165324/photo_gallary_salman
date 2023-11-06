@@ -1,5 +1,5 @@
 "use client";
-import React, {useState } from "react";
+import React, { useState } from "react";
 import { data } from "@/data/image";
 import SortableImages from "./SortableImages";
 import { DndContext, closestCenter } from "@dnd-kit/core";
@@ -13,11 +13,17 @@ import {
 const Gallery = () => {
   const [images, setImage] = useState(data);
 
-  const [selectedImagesForDelete, setSelectedImagesForDelete ] = useState([]); 
-  const totalSelectedImagesForDelete = selectedImagesForDelete.length; 
-  console.log(totalSelectedImagesForDelete)
-  
-   console.log("SelectedImagesForDelete", selectedImagesForDelete)
+  const [selectedImagesForDelete, setSelectedImagesForDelete] = useState([]);
+  const totalSelectedImagesForDelete = selectedImagesForDelete.length;
+
+  const handleDeleteImage = () => {
+
+    
+  }
+
+  console.log(totalSelectedImagesForDelete);
+
+  console.log("SelectedImagesForDelete", selectedImagesForDelete);
 
   // Event handler for onDragEnd event listener. It is fired after a draggable item is dropped.
   // onDragEnd event does not move draggable items into droppable containers.
@@ -48,13 +54,15 @@ const Gallery = () => {
       {/* Gallery container */}
       <div className="h-full w-full max-w-[842px]  rounded-lg bg-white  shadow-xl">
         {/* Gallery top Menu Bar */}
-        <div className="gallery-box-padding flex h-16  w-full items-center justify-between border-b-4 border-black">
+        <div className="gallery-box-padding flex h-16 w-full   items-center justify-between border-b-4 border-black">
           <div className="flex items-center gap-1">
             <IoMdCheckboxOutline></IoMdCheckboxOutline>
             <p> Files Selected: {totalSelectedImagesForDelete}</p>
           </div>
           <div>
-            <p>Delete Files</p>
+            <button onClick={handleDeleteImage} className="ghost-btn">
+              Delete
+            </button>
           </div>
         </div>
 
@@ -67,7 +75,12 @@ const Gallery = () => {
             <SortableContext items={images} strategy={rectSortingStrategy}>
               {images.map((image) => (
                 // SortableImages is a custom component which internally uses useSortable hook from dnd kit to Manage drag, drop and sorting
-                <SortableImages key={image.id} image={image} setSelectedImagesForDelete = {setSelectedImagesForDelete} selectedImagesForDelete= {selectedImagesForDelete}></SortableImages>
+                <SortableImages
+                  key={image.id}
+                  image={image}
+                  setSelectedImagesForDelete={setSelectedImagesForDelete}
+                  selectedImagesForDelete={selectedImagesForDelete}
+                ></SortableImages>
               ))}
             </SortableContext>
           </DndContext>
