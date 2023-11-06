@@ -103,7 +103,7 @@ const Gallery = () => {
         {/* Gallery Picture container */}
 
         <div className="flex flex-col items-center ">
-          <div className="gallery-box-padding my-5 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5 xl:gap-6 ">
+          <div className="gallery-box-padding my-5 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:gap-6 ">
             {/* The <DndContext> provider makes use of the React Context API to share data between draggable and droppable components and hooks. */}
             <DndContext
               collisionDetection={closestCenter}
@@ -124,7 +124,8 @@ const Gallery = () => {
                 ))}
               </SortableContext>
             </DndContext>
-            <div className="flex h-[138px] w-[138px] flex-col items-center justify-center gap-4 border-2 border-dashed bg-red-50">
+            {/* image upload div */}
+            <div className="flex h-[120px] w-[120px] flex-col items-center justify-center gap-4 border-2 border-dashed bg-red-50 md:h-[138px] md:w-[138px]">
               {" "}
               <AiOutlinePicture size={26}></AiOutlinePicture>
               <p>Add Image</p>

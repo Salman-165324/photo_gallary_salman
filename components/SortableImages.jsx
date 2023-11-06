@@ -11,8 +11,9 @@ const SortableImages = ({
 }) => {
   const checkboxRef = useRef(null);
 
-  const firstBoxSize = index === 0 && "lg:w-[300px] lg:h-[300px] lg:col-span-2   lg:row-span-2";
- 
+  const firstBoxSize =
+    index === 0 &&
+    "lg:w-[300px] lg:h-[300px] sm:col-span-2 md:w-full md:h-full  sm:row-span-2";
 
   // Argument {id:image.id} the id argument works as a identifier.
   // The argument passed to the id argument of useSortable should match the id passed in the items array of the parent SortableContext provider.
@@ -26,6 +27,7 @@ const SortableImages = ({
     setNodeRef,
     transform,
     transition,
+    isDragging,
   } = useSortable({ id: image.id });
 
   //  set touch-action: none to prevent scroll of the page due to the initiation of a drag.
@@ -33,6 +35,7 @@ const SortableImages = ({
     transition,
     transform: CSS.Transform.toString(transform),
     touchAction: "none",
+    zIndex: isDragging && 35,
   };
 
   const handleCheckboxChange = () => {
@@ -63,15 +66,21 @@ const SortableImages = ({
 
   return (
     // If we use dnd properties on a div event handlers doesn't work on that. So we need to use some a wrapper div around that to add an event handler the checkbox
-    <div className={` ${firstBoxSize} group relative`}>
+    <div className={` ${firstBoxSize} group relative aspect-square`}>
       <div
         ref={setNodeRef}
         {...listeners}
         {...attributes}
         style={style}
-        className={` ${firstBoxSize} relative h-[138px] w-[138px] overflow-hidden rounded-lg border-2 border-black `}
+        className={` ${firstBoxSize} relative aspect-square h-[120px] w-[120px] overflow-hidden rounded-lg border-2 border-slate-600 sm:h-full sm:w-full md:h-[138px] md:w-[138px] `}
       >
-        <Image key={image.id} src={image.url} alt="" fill></Image>
+        <Image
+          style="object-cover"
+          key={image.id}
+          src={image.url}
+          alt=""
+          fill
+        ></Image>
       </div>
 
       <div className="absolute left-3 top-3 hidden transition-all duration-500 group-hover:block">
