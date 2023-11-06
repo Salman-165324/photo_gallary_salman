@@ -88,8 +88,8 @@ const Gallery = () => {
       {/* Gallery container */}
       <div className="h-full w-full max-w-[842px]  rounded-lg bg-white  shadow-xl">
         {/* Gallery top Menu Bar */}
-        <div className="lg:gallery-box-padding flex h-16 w-full items-center   justify-between border-b-4 border-black px-2">
-          <div className="flex items-center gap-1">
+        <div className="lg:gallery-box-padding flex h-16 w-full items-center   justify-between border-b-4 border-slate-700 px-2">
+          <div className="flex items-center gap-1 text-sm md:text-base">
             <IoMdCheckboxOutline></IoMdCheckboxOutline>
             <p> Files Selected: {totalSelectedImagesForDelete}</p>
           </div>
