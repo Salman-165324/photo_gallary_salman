@@ -64,7 +64,7 @@ const SortableImages = ({
         {...listeners}
         {...attributes}
         style={style}
-        className=" pointer-events-none relative h-[200px] w-[200px] overflow-hidden rounded-lg border-2 border-black "
+        className="relative h-[200px] w-[200px] overflow-hidden rounded-lg border-2 border-black "
       >
         <Image key={image.id} src={image.url} alt="" fill></Image>
       </div>

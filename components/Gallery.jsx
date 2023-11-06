@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { data } from "@/data/image";
 import SortableImages from "./SortableImages";
-import { DndContext, closestCenter } from "@dnd-kit/core";
+import { DndContext, KeyboardSensor, MouseSensor, TouchSensor, closestCenter, useSensor, useSensors } from "@dnd-kit/core";
 import { IoMdCheckboxOutline } from "react-icons/io";
 import {
   SortableContext,
@@ -15,6 +15,30 @@ const Gallery = () => {
 
   const [selectedImagesForDelete, setSelectedImagesForDelete] = useState([]);
   const totalSelectedImagesForDelete = selectedImagesForDelete.length;
+
+  const mouseSensor = useSensor(MouseSensor, {
+    // Require the mouse to move by 10 pixels before activating
+    activationConstraint: {
+      distance: 8,
+    },
+  });
+
+  const touchSensor = useSensor(TouchSensor, {
+    // Press delay of 250ms, with tolerance of 5px of movement
+    activationConstraint: {
+      delay: 250,
+      tolerance: 5,
+    },
+  });
+ 
+  const keyboardSensor = useSensor(KeyboardSensor);
+  
+  const sensors = useSensors(
+    mouseSensor,
+    touchSensor,
+    keyboardSensor,
+  );
+
 
   const handleDeleteImage = () => {
     // filtering images array to find which image's id aren't in list of images for delete.
@@ -78,6 +102,7 @@ const Gallery = () => {
             <DndContext
               collisionDetection={closestCenter}
               onDragEnd={onDragEnd}
+              sensors={sensors}
             >
               {/* The SortableContext provides information via context that is consumed by the useSortable hook. */}
               <SortableContext items={images} strategy={rectSortingStrategy}>
