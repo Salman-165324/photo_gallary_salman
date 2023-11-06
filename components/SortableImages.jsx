@@ -72,7 +72,7 @@ const SortableImages = ({
         {...listeners}
         {...attributes}
         style={style}
-        className={` ${firstBoxSize} relative aspect-square h-[120px] w-[120px] overflow-hidden rounded-lg border-2 border-slate-600 sm:h-full sm:w-full md:h-[138px] md:w-[138px] `}
+        className={` ${firstBoxSize} relative aspect-square h-[120px] w-[120px] overflow-hidden  rounded-br-[32px] rounded-tl-xl rounded-tr-2xl border-2 border-slate-600 sm:h-full sm:w-full md:h-[138px] md:w-[138px] `}
       >
         <Image
           style="object-cover"
