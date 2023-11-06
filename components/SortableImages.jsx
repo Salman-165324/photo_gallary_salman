@@ -37,7 +37,8 @@ const SortableImages = ({
     if (checkboxRef.current.checked) {
       const isAlreadyAdded = selectedImagesForDelete.includes(image.id);
       if (!isAlreadyAdded) {
-        const newArray = selectedImagesForDelete;
+        // used Array destructure method so that we don't use the same reference. Now a copy of the items of selectedImagesForDelete array will be passed. 
+        const newArray = [...selectedImagesForDelete];
 
         newArray.push(image.id);
         setSelectedImagesForDelete(newArray);

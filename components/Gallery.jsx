@@ -14,6 +14,8 @@ const Gallery = () => {
   const [images, setImage] = useState(data);
 
   const [selectedImagesForDelete, setSelectedImagesForDelete ] = useState([]); 
+  const totalSelectedImagesForDelete = selectedImagesForDelete.length; 
+  console.log(totalSelectedImagesForDelete)
   
    console.log("SelectedImagesForDelete", selectedImagesForDelete)
 
@@ -49,7 +51,7 @@ const Gallery = () => {
         <div className="gallery-box-padding flex h-16  w-full items-center justify-between border-b-4 border-black">
           <div className="flex items-center gap-1">
             <IoMdCheckboxOutline></IoMdCheckboxOutline>
-            <p> Files Selected</p>
+            <p> Files Selected: {totalSelectedImagesForDelete}</p>
           </div>
           <div>
             <p>Delete Files</p>
