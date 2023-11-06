@@ -17,8 +17,10 @@ const Gallery = () => {
   const totalSelectedImagesForDelete = selectedImagesForDelete.length;
 
   const handleDeleteImage = () => {
-
-    
+    // filtering images array to find which image's id aren't in list of images for delete. 
+    const newArray = images.filter(image =>  !selectedImagesForDelete.includes(image.id))
+    setImage(newArray);
+    setSelectedImagesForDelete([]);
   }
 
   console.log(totalSelectedImagesForDelete);
