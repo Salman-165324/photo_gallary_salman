@@ -1,7 +1,7 @@
 "use client";
 import { useSortable } from "@dnd-kit/sortable";
 import Image from "next/image";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { CSS } from "@dnd-kit/utilities";
 
 const SortableImages = ({

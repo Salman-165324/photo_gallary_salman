@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, {useState } from "react";
 import { data } from "@/data/image";
 import SortableImages from "./SortableImages";
 import { DndContext, closestCenter } from "@dnd-kit/core";
