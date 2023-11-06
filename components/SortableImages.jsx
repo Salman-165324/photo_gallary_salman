@@ -12,7 +12,7 @@ const SortableImages = ({
 }) => {
   const checkboxRef = useRef(null);
 
-  const firstBoxSize = index === 0 && "lg:w-[300px] lg:h-[300px] col-span-2  first:col-span-2 row-span-2";
+  const firstBoxSize = index === 0 && "lg:w-[300px] lg:h-[300px] lg:col-span-2   lg:row-span-2";
  
 
   // Argument {id:image.id} the id argument works as a identifier.
