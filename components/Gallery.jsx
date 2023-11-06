@@ -20,6 +20,14 @@ import {
   rectSortingStrategy,
 } from "@dnd-kit/sortable";
 
+const backgroundStyles = {
+  backgroundImage: `url(https://res.cloudinary.com/dctkvot0v/image/upload/f_auto,q_auto/v1/ollyo-images-raw/r1jzp9htswsqdxjj4nhs)`,
+  backgroundSize: "cover",
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "center",
+  backgroundAttachment: "fixed",
+};
+
 const Gallery = () => {
   const [images, setImage] = useState(data);
 
@@ -84,9 +92,9 @@ const Gallery = () => {
   };
 
   return (
-    <section className="flex flex-col items-center justify-center  px-4 py-20 sm:px-6">
+    <section className="flex flex-col items-center justify-center px-4  py-20 sm:px-6">
       {/* Gallery container */}
-      <div className="h-full w-full max-w-[842px]  rounded-lg bg-white  shadow-xl">
+      <div style={backgroundStyles} className="h-full w-full max-w-[842px]  rounded-lg bg-white  shadow-xl">
         {/* Gallery top Menu Bar */}
         <div className="lg:gallery-box-padding flex h-16 w-full items-center   justify-between border-b-4 border-slate-700 px-2">
           <div className="flex items-center gap-1 text-sm md:text-base">
@@ -103,7 +111,10 @@ const Gallery = () => {
         {/* Gallery Picture container */}
 
         <div className="flex flex-col items-center ">
-          <div className="gallery-box-padding my-5 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:gap-6 ">
+          <div
+            
+            className="gallery-box-padding my-5 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:gap-6 "
+          >
             {/* The <DndContext> provider makes use of the React Context API to share data between draggable and droppable components and hooks. */}
             <DndContext
               collisionDetection={closestCenter}
