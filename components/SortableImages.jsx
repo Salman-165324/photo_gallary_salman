@@ -10,6 +10,7 @@ const SortableImages = ({
   index,
 }) => {
   const checkboxRef = useRef(null);
+  const boundingRef = useRef(null);
 
   const firstBoxSize =
     index === 0 &&
@@ -66,13 +67,33 @@ const SortableImages = ({
 
   return (
     // If we use dnd properties on a div event handlers doesn't work on that. So we need to use some a wrapper div around that to add an event handler the checkbox
-    <div className={` ${firstBoxSize} group relative aspect-square`}>
+    <div
+      className={` ${firstBoxSize} group relative aspect-square [perspective:800px]`}
+    >
       <div
         ref={setNodeRef}
         {...listeners}
         {...attributes}
         style={style}
-        className={` ${firstBoxSize} relative aspect-square h-[120px] w-[120px] overflow-hidden  rounded-br-[32px] rounded-tl-xl rounded-tr-2xl border-2 border-slate-600 sm:h-full sm:w-full md:h-[138px] md:w-[138px] `}
+        className={` ${firstBoxSize} relative aspect-square h-[120px] w-[120px] overflow-hidden  rounded-br-[32px] rounded-tl-xl rounded-tr-2xl border-2 border-slate-600 transition-transform ease-out hover:[transform:rotateX(var(--x-rotation))_rotateY(var(--y-rotation))_scale(1.1)] sm:h-full sm:w-full md:h-[138px] md:w-[138px]`}
+        onMouseLeave={() => (boundingRef.current = null)}
+        onMouseEnter={(ev) => {
+          boundingRef.current = ev.currentTarget.getBoundingClientRect();
+        }}
+        onMouseMove={(ev) => {
+          if (!boundingRef.current) return;
+          const x = ev.clientX - boundingRef.current.left;
+          const y = ev.clientY - boundingRef.current.top;
+          const xPercentage = x / boundingRef.current.width;
+          const yPercentage = y / boundingRef.current.height;
+          const xRotation = (xPercentage - 0.5) * 20;
+          const yRotation = (0.5 - yPercentage) * 20;
+
+          ev.currentTarget.style.setProperty("--x-rotation", `${yRotation}deg`);
+          ev.currentTarget.style.setProperty("--y-rotation", `${xRotation}deg`);
+          ev.currentTarget.style.setProperty("--x", `${xPercentage * 100}%`);
+          ev.currentTarget.style.setProperty("--y", `${yPercentage * 100}%`);
+        }}
       >
         <Image
           style="object-cover"
