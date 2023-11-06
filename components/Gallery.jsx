@@ -16,6 +16,7 @@ const Gallery = () => {
   const [selectedImagesForDelete, setSelectedImagesForDelete] = useState([]);
   const totalSelectedImagesForDelete = selectedImagesForDelete.length;
 
+  // dnd kit sensors 
   const mouseSensor = useSensor(MouseSensor, {
     // Require the mouse to move by 10 pixels before activating
     activationConstraint: {

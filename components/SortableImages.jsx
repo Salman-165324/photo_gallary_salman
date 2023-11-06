@@ -28,6 +28,7 @@ const SortableImages = ({
   const style = {
     transition,
     transform: CSS.Transform.toString(transform),
+    touchAction: 'none',
   };
 
   const handleCheckboxChange = () => {
