@@ -1,3 +1,18 @@
+
+## Caution
+
+To check the drag and drop feature from dev tool please press the left mouse button and hold it couple of second to start the dragging effect. I have delayed the activation of dragg and drop. 
+
+
+
+
+
+
+
+
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
