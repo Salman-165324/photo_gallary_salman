@@ -2,7 +2,15 @@
 import React, { useState } from "react";
 import { data } from "@/data/image";
 import SortableImages from "./SortableImages";
-import { DndContext, KeyboardSensor, MouseSensor, TouchSensor, closestCenter, useSensor, useSensors } from "@dnd-kit/core";
+import {
+  DndContext,
+  KeyboardSensor,
+  MouseSensor,
+  TouchSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import { IoMdCheckboxOutline } from "react-icons/io";
 import {
   SortableContext,
@@ -16,7 +24,7 @@ const Gallery = () => {
   const [selectedImagesForDelete, setSelectedImagesForDelete] = useState([]);
   const totalSelectedImagesForDelete = selectedImagesForDelete.length;
 
-  // dnd kit sensors 
+  // dnd kit sensors
   const mouseSensor = useSensor(MouseSensor, {
     // Require the mouse to move by 10 pixels before activating
     activationConstraint: {
@@ -31,15 +39,10 @@ const Gallery = () => {
       tolerance: 5,
     },
   });
- 
-  const keyboardSensor = useSensor(KeyboardSensor);
-  
-  const sensors = useSensors(
-    mouseSensor,
-    touchSensor,
-    keyboardSensor,
-  );
 
+  const keyboardSensor = useSensor(KeyboardSensor);
+
+  const sensors = useSensors(mouseSensor, touchSensor, keyboardSensor);
 
   const handleDeleteImage = () => {
     // filtering images array to find which image's id aren't in list of images for delete.
@@ -98,7 +101,7 @@ const Gallery = () => {
         {/* Gallery Picture container */}
 
         <div className="flex flex-col items-center ">
-          <div className="gallery-box-padding my-5 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:gap-6">
+          <div className="gallery-box-padding my-5 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5 xl:gap-6 ">
             {/* The <DndContext> provider makes use of the React Context API to share data between draggable and droppable components and hooks. */}
             <DndContext
               collisionDetection={closestCenter}
@@ -107,10 +110,11 @@ const Gallery = () => {
             >
               {/* The SortableContext provides information via context that is consumed by the useSortable hook. */}
               <SortableContext items={images} strategy={rectSortingStrategy}>
-                {images.map((image) => (
+                {images.map((image, index) => (
                   // SortableImages is a custom component which internally uses useSortable hook from dnd kit to Manage drag, drop and sorting
                   <SortableImages
                     key={image.id}
+                    index = {index}
                     image={image}
                     setSelectedImagesForDelete={setSelectedImagesForDelete}
                     selectedImagesForDelete={selectedImagesForDelete}
@@ -118,7 +122,7 @@ const Gallery = () => {
                 ))}
               </SortableContext>
             </DndContext>
-            <div className="flex h-[200px] w-[200px] items-center justify-center bg-red-50">
+            <div className="flex h-[138px] w-[138px] items-center justify-center bg-red-50">
               {" "}
               Add Images{" "}
             </div>

@@ -8,8 +8,12 @@ const SortableImages = ({
   image,
   selectedImagesForDelete,
   setSelectedImagesForDelete,
+  index,
 }) => {
   const checkboxRef = useRef(null);
+
+  const firstBoxSize = index === 0 && "lg:w-[300px] lg:h-[300px] col-span-2  first:col-span-2 row-span-2";
+ 
 
   // Argument {id:image.id} the id argument works as a identifier.
   // The argument passed to the id argument of useSortable should match the id passed in the items array of the parent SortableContext provider.
@@ -25,10 +29,11 @@ const SortableImages = ({
     transition,
   } = useSortable({ id: image.id });
 
+  //  set touch-action: none to prevent scroll of the page due to the initiation of a drag.
   const style = {
     transition,
     transform: CSS.Transform.toString(transform),
-    touchAction: 'none',
+    touchAction: "none",
   };
 
   const handleCheckboxChange = () => {
@@ -59,13 +64,13 @@ const SortableImages = ({
 
   return (
     // If we use dnd properties on a div event handlers doesn't work on that. So we need to use some a wrapper div around that to add an event handler the checkbox
-    <div className="group relative">
+    <div className={` ${firstBoxSize} group relative`}>
       <div
         ref={setNodeRef}
         {...listeners}
         {...attributes}
         style={style}
-        className="relative h-[200px] w-[200px] overflow-hidden rounded-lg border-2 border-black "
+        className={` ${firstBoxSize} relative h-[138px] w-[138px] overflow-hidden rounded-lg border-2 border-black `}
       >
         <Image key={image.id} src={image.url} alt="" fill></Image>
       </div>
