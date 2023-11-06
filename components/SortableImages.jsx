@@ -9,7 +9,6 @@ const SortableImages = ({
   selectedImagesForDelete,
   setSelectedImagesForDelete,
 }) => {
-  const [isChecked, setIsChecked] = useState(false);
   const checkboxRef = useRef(null);
 
   // Argument {id:image.id} the id argument works as a identifier.
@@ -34,11 +33,6 @@ const SortableImages = ({
   const handleCheckboxChange = () => {
     // toggling the isChecked state. As the initial value is set to false it will correctly hold the actual state of the checkbox element even when it will be changed multiple of time.
 
-    console.log("On Click Check");
-
-    setIsChecked(!isChecked);
-
-    console.log("Checking Checkobx property", checkboxRef.current);
 
     if (checkboxRef.current.checked) {
       const isAlreadyAdded = selectedImagesForDelete.includes(image.id);
@@ -52,9 +46,7 @@ const SortableImages = ({
       // checking whether this id was added to the ref array before. If it is we are going to remove it.
 
       const isAddedBefore = selectedImagesForDelete.includes(image.id);
-      console.log("else checking1");
       if (isAddedBefore) {
-        console.log("else checking2");
         const newArray = selectedImagesForDelete.filter(
           (savedId) => savedId !== image.id
         );
