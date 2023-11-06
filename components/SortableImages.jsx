@@ -3,7 +3,6 @@ import { useSortable } from "@dnd-kit/sortable";
 import Image from "next/image";
 import React, { useRef } from "react";
 import { CSS } from "@dnd-kit/utilities";
-
 const SortableImages = ({
   image,
   selectedImagesForDelete,

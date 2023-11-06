@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import { data } from "@/data/image";
 import SortableImages from "./SortableImages";
+import { AiOutlinePicture } from "react-icons/ai";
+
 import {
   DndContext,
   KeyboardSensor,
@@ -114,7 +116,7 @@ const Gallery = () => {
                   // SortableImages is a custom component which internally uses useSortable hook from dnd kit to Manage drag, drop and sorting
                   <SortableImages
                     key={image.id}
-                    index = {index}
+                    index={index}
                     image={image}
                     setSelectedImagesForDelete={setSelectedImagesForDelete}
                     selectedImagesForDelete={selectedImagesForDelete}
@@ -122,9 +124,10 @@ const Gallery = () => {
                 ))}
               </SortableContext>
             </DndContext>
-            <div className="flex h-[138px] w-[138px] items-center justify-center bg-red-50">
+            <div className="flex h-[138px] w-[138px] flex-col items-center justify-center gap-4 border-2 border-dashed bg-red-50">
               {" "}
-              Add Images{" "}
+              <AiOutlinePicture size={26}></AiOutlinePicture>
+              <p>Add Image</p>
             </div>
           </div>
         </div>
